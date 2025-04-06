@@ -1,0 +1,35 @@
+;Number Addition With Carry
+
+jmp start
+
+;data
+
+;code
+start: nop
+; Store A = 99 at 2000H
+; Store B = 99 at 2001H  
+MVI A, 99H
+STA 2000H
+MVI A, 99H
+STA 2001H
+
+; Assume Carry is Zero
+MVI C, 00H
+
+; Load the Values
+LDA 2000H
+MOV B,A
+LDA 2001H
+
+; Add the Numbers
+ADD B
+
+; Skip if Carry not Found
+JNC Skip
+INR C
+
+; This will be Executed as Carry is Found
+Skip: 	STA 2002H
+		MOV A,C 
+        STA 2003H
+        HLT

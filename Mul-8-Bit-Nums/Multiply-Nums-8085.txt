@@ -1,0 +1,41 @@
+; Multiplication of 2-Bit Numbers
+
+jmp start
+
+;data
+start: nop
+; Store A = 3 at 2000H
+; Store B = 4 at 2001H  
+MVI A, 03H
+STA 2000H
+MVI A, 04H
+STA 2001H
+
+; Load HL Register and Store Address 2000H
+LXI H, 2000H
+MOV B, M  ; Move Value from Memory into B Register
+MVI A, 00H
+MOV C, A
+INX H 	;Load HL Register and Store Address 2001H
+
+; Add Contents in Accumulator & Memory
+Continue: ADD M 
+
+; Jump to Skip if No Carry
+JNC Skip
+INR C
+
+; Decrement the Value of Register B
+Skip: DCR B
+
+; Jump if Not Zero Otherwise Come out of the Loop
+JNZ Continue
+
+; Store the Multiplication Value into 2002H
+STA 2002H
+
+; Move & Store the Carry Value into 2003H
+MOV A, C
+STA 2003H
+
+HLT

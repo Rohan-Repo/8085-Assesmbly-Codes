@@ -1,0 +1,34 @@
+;Number Subtraction With Borrow
+
+jmp start
+
+;data
+start: nop
+; Store A = 5 at 2000H
+; Store B = 4 at 2001H  
+MVI A, 05H
+STA 2000H
+MVI A, 04H
+STA 2001H
+
+; Assume Borrow is Zero
+MVI C, 00H
+
+;code
+; Load the Values
+LDA 2000H
+MOV B,A
+LDA 2001H
+
+; Subtract the Numbers
+SUB B
+
+; Skip if Borrow not Found
+JNC Skip
+INR C
+
+; This will be Executed as Borrow is Found
+Skip: 	STA 2002H
+		MOV A,C 
+        STA 2003H
+        HLT

@@ -1,0 +1,18 @@
+; Store One Value into Memory 
+
+JMP startProgram
+;Jump/start executing from specified label
+; From Line 3 Move directly to Line 10
+
+;data
+
+;code
+startProgram: NOP ; no operation
+; MVI- Move data immediately into a register
+; STA- Store the value from the accumulator
+; 		into specified memory location
+
+MVI A, 12H ; Move 12 into accumulator
+STA 1111H ; Store at memory location 1111
+
+HLT ; Stop execution completely

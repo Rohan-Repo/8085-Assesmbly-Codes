@@ -1,0 +1,13 @@
+; Store Value
+
+jmp start
+
+;data
+
+;code
+start: nop
+; Store A = 90 at 2022H
+MVI A, 90H
+STA 2022H
+
+HLT

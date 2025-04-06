@@ -1,0 +1,62 @@
+; Arrange N 8-Bit Numbers in Descending Order
+
+jmp start
+
+;data
+start: nop
+
+; Store N = 5 at 2000H  
+MVI A, 05H
+STA 2000H
+
+; Store n1 = 9 at 2001H
+MVI A, 09H
+STA 2001H
+
+; Store n2 = 16 at 2002H
+MVI A, 16H
+STA 2002H
+
+; Store n3 = 21 at 2003H
+MVI A, 21H
+STA 2003H
+
+; Store n4 = 37 at 2004H
+MVI A, 37H
+STA 2004H
+
+; Store n5 = 42 at 2005H
+MVI A, 42H
+STA 2005H
+
+; CODE
+
+LDA 2000H
+MOV B, A
+DCR B
+
+LOOP3: 	LXI H, 2000H
+		MOV C, M
+        DCR C
+        INX H
+
+LOOP2:	MOV A, M
+		INX H
+        CMP M
+        
+; All the Logic Stays the Same as Ascending with the Flag Change JNC Instead of JC
+; Since we want the Greatest Number at the Start not the End
+		JNC LOOP1
+        
+        MOV D, M
+        MOV M, A
+        DCX H
+        MOV M, D
+        INX H
+        
+LOOP1:	DCR C
+		JNZ LOOP2
+        DCR B
+        JNZ LOOP3
+        
+HLT

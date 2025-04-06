@@ -1,0 +1,54 @@
+; Largest of N Numbers
+
+jmp start
+
+;data
+start: nop
+
+; Store N = 5 at 2000H  
+MVI A, 05H
+STA 2000H
+
+; Store n1 = 27 at 2001H
+MVI A, 27H
+STA 2001H
+
+; Store n2 = 65 at 2002H
+MVI A, 65H
+STA 2002H
+
+; Store n3 = 43 at 2003H
+MVI A, 43H
+STA 2003H
+
+; Store n4 = 12 at 2004H
+MVI A, 12H
+STA 2004H
+
+; Store n5 = 32 at 2005H
+MVI A, 32H
+STA 2005H
+
+LXI H, 2000H
+MOV C, M
+
+INX H
+
+DCR C
+
+MOV A, M
+
+LOOP: 	INX H
+		CMP M
+        
+        JNC SKIP
+        
+        MOV A, M
+
+SKIP: 	DCR C
+		
+        JNZ LOOP
+        
+        STA 2015H
+ 		
+        HLT
